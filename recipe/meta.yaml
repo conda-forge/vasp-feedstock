@@ -26,7 +26,7 @@ build:
     - vasp-create-hi-pass-viz = vasp.postprocessing.postprocessing_h5py.create_hi_pass_viz:main
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 0
+  number: 1
 
 requirements:
   host:
@@ -62,6 +62,9 @@ test:
     # See: https://github.com/conda-forge/fenics-feedstock/pull/256
     # - pip check
 
+    # Avoid OpenMPI errors when running mpi4py in isolated environments
+    - export OMPI_MCA_plm=isolated
+
     # Check that all CLI entry points are available
     - vasp-generate-mesh --help
     - vasp-generate-solid-probe --help
@@ -76,9 +79,6 @@ test:
     - vasp-create-spectrograms-chromagrams --help
     - vasp-create-spectrum --help
     - vasp-create-hi-pass-viz --help
-
-    # Avoid OpenMPI errors when running mpi4py in isolated environments
-    - export OMPI_MCA_plm=isolated
 
     # Only a small subset of fast and representative tests are run here
     # to reduce test time in conda-forge CI
