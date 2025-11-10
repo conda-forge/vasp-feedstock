@@ -37,6 +37,7 @@ requirements:
   run:
     - python >={{ python_min }}
     - fenics >=2019.1.0
+    - sympy <1.12  # FEniCS 2019.1 JIT fails with SymPy ≥1.12 ("TypeError: derivative of <class 'list'>")
     - vmtk
     - morphman
     - paramiko
