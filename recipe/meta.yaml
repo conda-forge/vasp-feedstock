@@ -26,7 +26,7 @@ build:
     - vasp-create-hi-pass-viz = vasp.postprocessing.postprocessing_h5py.create_hi_pass_viz:main
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 0
+  number: 1
 
 requirements:
   host:
@@ -50,6 +50,8 @@ requirements:
     - mpi4py ==3.1.4
     - turtlefsi
     - vampy
+    # Ensure GUI-capable VTK (Qt-backed, avoids osmesa/egl)
+    - vtk >=9,<10 qt_*
 
 test:
   imports:
